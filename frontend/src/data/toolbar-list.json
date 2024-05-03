@@ -1,0 +1,35 @@
+[
+    {
+        "tool":"hand"
+    },
+    {
+        "tool":"cursor"
+    },
+    {
+        "tool":"square"
+    },
+    {
+        "tool":"rhombus"
+    },
+    {
+        "tool":"circle"
+    },
+    {
+        "tool":"arrow"
+    },
+    {
+        "tool":"line"
+    },
+    {
+        "tool":"pencil"
+    },
+    {
+        "tool":"text"
+    },
+    {
+        "tool":"image"
+    },
+    {
+        "tool":"eraser"
+    }
+]

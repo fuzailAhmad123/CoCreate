@@ -1,0 +1,15 @@
+
+.transition-500{
+    @apply transition-all duration-500 ease-in-out
+}
+.transition-300{
+    @apply transition-all duration-300 ease-in-out
+}
+.toolbar-shadow {
+      box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.057);
+}
+
+.helvetica-bold {
+    font-family: 'Helvetica-Bold', sans-serif;
+    font-style: normal;
+}

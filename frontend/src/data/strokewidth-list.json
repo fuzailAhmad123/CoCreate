@@ -1,0 +1,14 @@
+[
+    {
+        "name":"Thin",
+        "value":"5px"
+    },
+    {
+        "name":"Bold",
+        "value":"10px" 
+    },
+    {
+        "name":"Extra-Bold",
+        "value":"15px" 
+    }
+]
