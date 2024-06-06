@@ -5,6 +5,12 @@ const server = require("http").createServer();
 const { Server } = require("socket.io");
 const { addUser, getUser, removeUser } = require("./utils/users");
 
+app.use(
+  cors({
+    origin:'*',
+    credentials: true,
+  })
+)
 const io = new Server(server);
 
 //routes
