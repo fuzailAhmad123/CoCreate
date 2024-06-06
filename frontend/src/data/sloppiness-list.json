@@ -1,5 +1,14 @@
 [
-    "Architect",
-    "Artist",
-    "Cartoonist"
+  {
+    "name": "Architect",
+    "value": 0
+  },
+  {
+    "name":  "Artist",
+    "value": 1
+  },
+  {
+    "name":  "Cartoonist",
+    "value": 2
+  }
 ]

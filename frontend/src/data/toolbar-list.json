@@ -6,16 +6,13 @@
         "tool":"cursor"
     },
     {
-        "tool":"square"
+        "tool":"rectangle"
     },
     {
         "tool":"rhombus"
     },
     {
         "tool":"circle"
-    },
-    {
-        "tool":"arrow"
     },
     {
         "tool":"line"
@@ -25,11 +22,6 @@
     },
     {
         "tool":"text"
-    },
-    {
-        "tool":"image"
-    },
-    {
-        "tool":"eraser"
     }
+  
 ]

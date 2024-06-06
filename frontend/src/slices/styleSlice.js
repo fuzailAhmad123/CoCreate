@@ -10,11 +10,9 @@ const initialState = {
   backgroundHachureFill: localStorage.getItem("backgroundHachureFill")
     ? localStorage.getItem("backgroundHachureFill")
     : null,
-  strokeWidth: localStorage.getItem("strokeWidth")
-    ? localStorage.getItem("strokeWidth")
-    : null,
+  strokeWidth: 1,
   strokeStyle: localStorage.getItem("strokeStyle")
-    ? localStorage.getItem("strokeStyle")
+    ? JSON.parse(localStorage.getItem("strokeStyle"))
     : null,
   sloppiness: localStorage.getItem("sloppiness")
     ? localStorage.getItem("sloppiness")

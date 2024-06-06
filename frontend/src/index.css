@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'Helvetica-Bold';
+    src: local('Helvetica-Bold'), url(./assets/fonts/Helvetica/Helvetica-Bold.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Helvetica-BoldOblique';
+    src: local('Helvetica-BoldOblique'), url(./assets/fonts/Helvetica/Helvetica-BoldOblique.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'helvetica-light';
+    src: local('helvetica-light'), url(./assets/fonts/Helvetica/helvetica-light-587ebe5a59211.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Helvetica-Oblique';
+    src: local('Helvetica-Oblique'), url(./assets/fonts/Helvetica/Helvetica-Oblique.ttf) format('truetype');
+  }
+
+  @font-face {
+    font-family: 'Virgil' ;
+    src: local('Virgil'), url(./assets/fonts/Virgil/Virgil.ttf) format('truetype');
+  }

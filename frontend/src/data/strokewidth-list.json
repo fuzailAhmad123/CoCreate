@@ -1,14 +1,14 @@
 [
     {
         "name":"Thin",
-        "value":"5px"
+        "value": 1
     },
     {
         "name":"Bold",
-        "value":"10px" 
+        "value":3 
     },
     {
         "name":"Extra-Bold",
-        "value":"15px" 
+        "value":5 
     }
 ]

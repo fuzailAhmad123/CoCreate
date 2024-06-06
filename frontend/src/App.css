@@ -1,4 +1,7 @@
-
+.virgil {
+    font-family: 'Virgil', sans-serif;
+    font-style: normal;
+}
 .transition-500{
     @apply transition-all duration-500 ease-in-out
 }
@@ -12,4 +15,32 @@
 .helvetica-bold {
     font-family: 'Helvetica-Bold', sans-serif;
     font-style: normal;
+}
+
+.helvetica-boldoblique {
+    font-family: 'Helvetica-BoldOblique', sans-serif;
+    font-style: normal;
+}
+
+.helvetica-light {
+    font-family: 'helvetica-light', sans-serif;
+    font-style: normal;
+}
+
+.helvetica-oblique {
+    font-family: 'Helvetica-Oblique', sans-serif;
+    font-style: normal;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
 }

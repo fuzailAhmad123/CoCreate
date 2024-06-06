@@ -1,5 +1,14 @@
 [
-    "Line",
-    "Dashed",
-    "Dotted"
+  {
+    "name": "Line",
+    "value": []
+  },
+  {
+    "name": "Dashed",
+    "value": [10,10]
+  },
+  {
+    "name": "Dotted",
+    "value": [3,3]
+  }
 ]
