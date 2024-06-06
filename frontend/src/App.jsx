@@ -10,7 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useSelector } from "react-redux";
 import { TbBrandSocketIo } from "react-icons/tb";
 
-const server = "http://localhost:5000";
+const server = process.env.BACKEND_URL;
 const connectionOptions = {
   "force new connection": true,
   reconnectionAttempts: "Infinity",
