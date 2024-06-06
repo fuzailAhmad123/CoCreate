@@ -8,11 +8,17 @@ const { addUser, getUser, removeUser } = require("./utils/users");
 
 app.use(
   cors({
-    origin:'*',
+    origin: "https://co-create-phi.vercel.app",
     credentials: true,
   })
 )
-const io = new Server(server);
+const io = new Server(server,  {
+  cors: {
+    origin: "https://co-create-phi.vercel.app", 
+    methods: ["GET", "POST"],
+    credentials: true
+  }
+});
 
 //routes
 app.get("/", (req, res) => {
