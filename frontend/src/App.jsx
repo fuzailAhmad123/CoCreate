@@ -10,15 +10,20 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useSelector } from "react-redux";
 import { TbBrandSocketIo } from "react-icons/tb";
 
-const server = process.env.BACKEND_URL;
-const connectionOptions = {
-  "force new connection": true,
-  reconnectionAttempts: "Infinity",
-  timeout: 10000,
-  transports: ["websocket"],
-};
+const server = import.meta.env.BACKEND_URL;
+console.log("server_url  : ", server);
 
-const socket = io(server, connectionOptions);
+if(!server){
+  throw new Error("Server URL not found")
+}
+  const connectionOptions = {
+    "force new connection": true,
+    reconnectionAttempts: "Infinity",
+    timeout: 10000,
+    transports: ["websocket"],
+  };
+  
+  const socket = io(server, connectionOptions);       
 
 function App() {
   const {canvasColor, theme} = useSelector((state) => state.theme);
