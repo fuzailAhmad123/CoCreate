@@ -10,7 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useSelector } from "react-redux";
 import { TbBrandSocketIo } from "react-icons/tb";
 
-const server = import.meta.env.BACKEND_URL;
+const server = import.meta.env.VITE_PUBLIC_BACKEND_URL;
 console.log("server_url  : ", server);
 
 if(!server){
