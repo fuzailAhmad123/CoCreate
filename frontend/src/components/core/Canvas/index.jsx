@@ -414,7 +414,7 @@ const Canvas = ({
     //do nothing if writing
     if (action === "writing") return;
 
-    const { offsetX, offsetY } = getAdjustedCoordinates(e.nativeEvent);
+    const { offsetX, offsetY } = getAdjustedCoordinates(e);
 
     //if panning tool is active
     if (e.button === 1 || pressedKeys.has(" ") || selectedTool === "hand") {
@@ -491,7 +491,7 @@ const Canvas = ({
 
   //func to handle mouse move
   const handleMouseMove = (e) => {
-    const { offsetX, offsetY } = getAdjustedCoordinates(e.nativeEvent);
+    const { offsetX, offsetY } = getAdjustedCoordinates(e);
 
     if (action === "panning" || selectedTool === "hand") {
       const deltaX = offsetX - startPanMousePosition.x;
@@ -644,7 +644,7 @@ const Canvas = ({
 
   //func to handle mouse up
   const handleMouseUp = (e) => {
-    const { offsetX, offsetY } = getAdjustedCoordinates(e.nativeEvent);
+    const { offsetX, offsetY } = getAdjustedCoordinates(e);
     // const { offsetX, offsetY } = e.nativeEvent;
     const index = state.history[state.index].length - 1;
     let copiedElements = [...state.history[state.index]];
@@ -935,24 +935,32 @@ const Canvas = ({
   }
 
   // Utility function to normalize coordinates
-const getEventCoordinates = (event) => {
-  if (event.touches && event.touches.length > 0) {
-    return {
-      rawX: event.touches[0].clientX,
-      rawY: event.touches[0].clientY,
-    };
-  } else {
-    return {
-      rawX: event.offsetX,
-      rawY: event.offsetY,
-    };
-  }
-};
+  const getEventCoordinates = (event) => {
+    if (event.touches && event.touches.length > 0) {
+      const touch = event.touches[0];
+      return {
+        rawX: touch.clientX,
+        rawY: touch.clientY,
+      };
+    } else if (event.changedTouches && event.changedTouches.length > 0) {
+      const touch = event.changedTouches[0];
+      return {
+        rawX: touch.clientX,
+        rawY: touch.clientY,
+      };
+    } else {
+      return {
+        rawX: event.offsetX,
+        rawY: event.offsetY,
+      };
+    }
+  };
+
   //func to get mouse coordinates
   const getAdjustedCoordinates = (event) => {
-      // Get raw mouse or touch coordinates .
-    const { rawX, rawY } = getEventCoordinates(event);
-    
+    // Get raw mouse or touch coordinates .
+    const { rawX, rawY } = getEventCoordinates(event.nativeEvent || event);
+
     // const rawX = event.offsetX;
     // const rawY = event.offsetY;
 
@@ -963,57 +971,68 @@ const getEventCoordinates = (event) => {
     return { offsetX, offsetY };
   };
 
-    return (
-      <>
-        {action === "writing" && (
-          <textarea
-            onBlur={handleBlur}
-            ref={textAreaRef}
-            placeholder="Start typing here..."
-            className={` min-w-[180px] h-[30px] bg-transparent placeholder:text-grey-50 virgil`}
-            style={{
-              position: "fixed",
-              top:
-                (selectedElement.y1 - 8) * scale +
-                panOffSet.y * scale -
-                scaleOffset.y,
-              left:
-                (selectedElement.x1 + 2) * scale +
-                panOffSet.x * scale -
-                scaleOffset.x,
-              color: selectedElement.options.color,
-              fontWeight: selectedElement.options.fontWeight,
-              margin: 0,
-              padding: 0,
-              border: 0,
-              outline: 0,
-              resize: "auto",
-              overflow: "hidden",
-              font: `${20 * scale}px`,
-              width: canvasRef.current
-                .getContext("2d")
-                .measureText(selectedElement.text).width,
-            }}
-          ></textarea>
-        )}
-
-        <canvas
-          id="canvas"
-          ref={canvasRef}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onTouchStart={(e) => handleMouseDown(e.touches[0])}
-          onTouchMove={(e) => handleMouseMove(e.touches[0])}
-          onTouchEnd={(e) => handleMouseUp(e.changedTouches[0])}
-          className={` bg-white dark:bg-black-25`}
-          style={{
-            backgroundColor: canvasColor,
-          }}
-        ></canvas>
-      </>
-    );
+  const handleTouchStart = (e) => {
+    handleMouseDown(e);
+  };
   
+  const handleTouchMove = (e) => {
+    handleMouseMove(e);
+  };
+  
+  const handleTouchEnd = (e) => {
+    handleMouseUp(e);
+  };
+
+  return (
+    <>
+      {action === "writing" && (
+        <textarea
+          onBlur={handleBlur}
+          ref={textAreaRef}
+          placeholder="Start typing here..."
+          className={` min-w-[180px] h-[30px] bg-transparent placeholder:text-grey-50 virgil`}
+          style={{
+            position: "fixed",
+            top:
+              (selectedElement.y1 - 8) * scale +
+              panOffSet.y * scale -
+              scaleOffset.y,
+            left:
+              (selectedElement.x1 + 2) * scale +
+              panOffSet.x * scale -
+              scaleOffset.x,
+            color: selectedElement.options.color,
+            fontWeight: selectedElement.options.fontWeight,
+            margin: 0,
+            padding: 0,
+            border: 0,
+            outline: 0,
+            resize: "auto",
+            overflow: "hidden",
+            font: `${20 * scale}px`,
+            width: canvasRef.current
+              .getContext("2d")
+              .measureText(selectedElement.text).width,
+          }}
+        ></textarea>
+      )}
+
+      <canvas
+        id="canvas"
+        ref={canvasRef}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        className={` bg-white dark:bg-black-25`}
+        style={{
+          backgroundColor: canvasColor,
+        }}
+      ></canvas>
+    </>
+  );
 };
 
 export default Canvas;
