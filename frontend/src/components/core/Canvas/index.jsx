@@ -934,11 +934,27 @@ const Canvas = ({
     return d.join(" ");
   }
 
+  // Utility function to normalize coordinates
+const getEventCoordinates = (event) => {
+  if (event.touches && event.touches.length > 0) {
+    return {
+      rawX: event.touches[0].clientX,
+      rawY: event.touches[0].clientY,
+    };
+  } else {
+    return {
+      rawX: event.offsetX,
+      rawY: event.offsetY,
+    };
+  }
+};
   //func to get mouse coordinates
   const getAdjustedCoordinates = (event) => {
-    // Get raw mouse coordinates
-    const rawX = event.offsetX;
-    const rawY = event.offsetY;
+      // Get raw mouse or touch coordinates .
+    const { rawX, rawY } = getEventCoordinates(event);
+    
+    // const rawX = event.offsetX;
+    // const rawY = event.offsetY;
 
     // Adjust coordinates based on panning offset
     const offsetX = (rawX - panOffSet.x * scale + scaleOffset.x) / scale;
@@ -987,6 +1003,9 @@ const Canvas = ({
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
+          onTouchStart={(e) => handleMouseDown(e.touches[0])}
+          onTouchMove={(e) => handleMouseMove(e.touches[0])}
+          onTouchEnd={(e) => handleMouseUp(e.changedTouches[0])}
           className={` bg-white dark:bg-black-25`}
           style={{
             backgroundColor: canvasColor,
