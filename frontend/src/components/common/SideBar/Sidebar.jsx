@@ -117,9 +117,28 @@ const Sidebar = ({
     setConfirmationModal(null);
   };
 
+
+  const exportImage = () => {
+    const canvas = canvasRef.current
+    if (canvas) {
+      // Convert canvas to data URL
+      const image = canvas.toDataURL('image/png');
+  
+      // Create a temporary anchor element
+      const link = document.createElement('a');
+      link.href = image;
+      link.download = 'canvas-image.png';
+  
+      // Append the anchor to the document, click it, and remove it
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
   return (
     <div className="w-full min-h-full flex flex-col gap-y-1">
-      <div className="w-full h-[32px] px-3 rounded-[10px] flex items-center gap-x-2 text-[14px] text-black dark:text-grey-25 helvetica-light cursor-pointer hover:bg-grey-5 text-opacity-60 dark:bg-opacity-20">
+      <div onClick={exportImage} className="w-full h-[32px] px-3 rounded-[10px] flex items-center gap-x-2 text-[14px] text-black dark:text-grey-25 helvetica-light cursor-pointer hover:bg-grey-5 text-opacity-60 dark:bg-opacity-20">
         <RxImage className="text-[14px]" />
         <p>Export Image...</p>
       </div>

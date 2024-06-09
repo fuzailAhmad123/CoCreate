@@ -9,16 +9,31 @@ import ConfirmationModal from "../components/common/Common_Modals/ConfirmationMo
 import ShareModal from "../components/common/ShareModal/ShareModal";
 import { useLocation, useParams } from "react-router-dom";
 import SharedImage from "../components/core/Canvas/SharedImage";
+import { FaChevronLeft } from "react-icons/fa";
 
-const HomePage = ({ socket, user, setUser, confirmationModal , setConfirmationModal, setUsersUpdated,usersUpdated, setShowPopUp, users, chats, setShowChats, newColor}) => {
+const HomePage = ({
+  socket,
+  user,
+  setUser,
+  confirmationModal,
+  setConfirmationModal,
+  setUsersUpdated,
+  usersUpdated,
+  setShowPopUp,
+  users,
+  chats,
+  setShowChats,
+  newColor,
+}) => {
   const { showToolDesignBar, showSideBar, elements, selectedElement, action } =
     useSelector((state) => state.tool);
   const canvasRef = useRef(null);
+  const {canvasColor} = useSelector((state) => state.theme);
   const ctxRef = useRef(null);
   const [history, setHistory] = useState([[]]);
   const [index, setIndex] = useState(0);
   const [state, setState] = useState({ history: [[]], index: 0 });
-  const [pathName , setPathName] = useState(null);
+  const [pathName, setPathName] = useState(null);
 
   const [scale, setScale] = useState(1);
   const [scaleOffset, setScaleOffset] = useState({ x: 0, y: 0 });
@@ -26,13 +41,20 @@ const HomePage = ({ socket, user, setUser, confirmationModal , setConfirmationMo
   const [showShareModal, setShowShareModal] = useState(false);
   const location = useLocation().pathname;
   useEffect(() => {
-         setPathName(location);
-  },[location])
+    setPathName(location);
+  }, [location]);
 
   // console.log(users);
   return (
-    <div className="w-screen h-screen relative bg-white dark:bg-black-25 ">
-      <TopNavbar setShowShareModal={setShowShareModal} user={user} pathName={pathName}  />
+    <div className="w-screen h-screen relative bg-white dark:bg-black-25 "
+    style={{
+      backgroundColor: canvasColor
+    }}>
+      <TopNavbar
+        setShowShareModal={setShowShareModal}
+        user={user}
+        pathName={pathName}
+      />
 
       {(user?.presenter === true || pathName === "/") && (
         <>
@@ -81,27 +103,27 @@ const HomePage = ({ socket, user, setUser, confirmationModal , setConfirmationMo
 
       {/* whiteboard  */}
       <div className="w-full h-full ">
-        {
-          (user?.presenter === true || pathName === "/") ?  (
-            <Canvas
-          canvasRef={canvasRef}
-          ctxRef={ctxRef}
-          history={history}
-          setHistory={setHistory}
-          index={index}
-          setIndex={setIndex}
-          state={state}
-          setState={setState}
-          scale={scale}
-          setScale={setScale}
-          scaleOffset={scaleOffset}
-          setScaleOffset={setScaleOffset}
-          user={user}
-          pathName={pathName}
-          socket={socket}
-        />
-          ) : (<SharedImage socket={socket} newColor={newColor} />) 
-        }
+        {user?.presenter === true || pathName === "/" ? (
+          <Canvas
+            canvasRef={canvasRef}
+            ctxRef={ctxRef}
+            history={history}
+            setHistory={setHistory}
+            index={index}
+            setIndex={setIndex}
+            state={state}
+            setState={setState}
+            scale={scale}
+            setScale={setScale}
+            scaleOffset={scaleOffset}
+            setScaleOffset={setScaleOffset}
+            user={user}
+            pathName={pathName}
+            socket={socket}
+          />
+        ) : (
+          <SharedImage socket={socket} newColor={newColor} />
+        )}
       </div>
 
       {confirmationModal && (

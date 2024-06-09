@@ -86,7 +86,10 @@ function App() {
   }, [theme, canvasColor]);
 
   return (
-    <div className="w-screen h-screen bg-white dark:bg-black-25 relative">
+    <div className="w-screen h-screen relative"
+    style={{
+      backgroundColor: canvasColor
+    }}>
       <ToastContainer />
       <Routes>
         <Route

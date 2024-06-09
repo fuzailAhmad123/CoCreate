@@ -3,6 +3,7 @@ import HomePage from "./HomePage";
 import UsersModal from "../components/common/Modals/UsersModal";
 import { useLocation, useNavigate } from "react-router-dom";
 import ChatsModal from "../components/common/Modals/ChatsModal";
+import { useSelector } from "react-redux";
 
 const RoomPage = ({
   user,
@@ -21,6 +22,7 @@ const RoomPage = ({
   const navigate = useNavigate();
   const [showPopUp, setShowPopUp] = useState(false);
   const [showChats, setShowChats] = useState(false);
+  const {canvasColor} = useSelector((state) => state.theme);
 
   // fire an event when left the room
   useEffect(() => {
@@ -37,7 +39,10 @@ const RoomPage = ({
     setConfirmationModal(null);
   };
   return (
-    <div className="min-h-screen min-w-screen relative">
+    <div className="min-h-screen min-w-screen relative"
+    style={{
+      backgroundColor: canvasColor
+    }}>
       {users?.length > 0 && path !== "/" && (
         <div className="w-full h-[36px] z-[100] hidden xl:flex justify-end gap-x-4 pr-[120px] absolute top-4 left-0">
           <div

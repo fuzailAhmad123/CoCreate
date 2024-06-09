@@ -26,6 +26,8 @@ import { TbBorderRadius } from "react-icons/tb";
 import { MdContentCopy } from "react-icons/md";
 import { RiDeleteBin3Line } from "react-icons/ri";
 import { HiMiniLink } from "react-icons/hi2";
+import { FaChevronLeft } from "react-icons/fa";
+import { setShowSideBar, setShowToolDesignBar } from "../../../slices/toolSlice";
 
 const ToolDesignBar = () => {
   const {
@@ -39,7 +41,7 @@ const ToolDesignBar = () => {
   } = useSelector((state) => state.style);
   const dispatch = useDispatch();
   return (
-    <div className="w-full min-h-full flex flex-col gap-y-3">
+    <div className="w-full min-h-full flex flex-col gap-y-3 relative ">
       {/* stroke style  */}
       <div className="">
         <p className="text-[10px] font-extralight text-black dark:text-grey-25 text-opacity-70 helvetica-light ">
@@ -345,6 +347,11 @@ const ToolDesignBar = () => {
             </div>
         </div>
       </div>  
+
+
+      <div  onClick={() => dispatch(setShowToolDesignBar(null))} className="bg-blue-25 text-white  dark:bg-blue-175 dark:text-blue-100 flex md:hidden justify-center items-center rounded-tl-[5px] rounded-bl-[5px] absolute  right-0 top-[50%] p-2 cursor-pointer z-[999] -translate-y-[50%]  ">
+              <FaChevronLeft className="text-[13px]" />
+            </div>
     </div>
   );
 };
